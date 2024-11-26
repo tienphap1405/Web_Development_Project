@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
         <h3>Team Member</h3>
         <ul>
           <li>Simon Luna Patiarroy</li>
-          <li>Tien Phap "Evan" Nguyen</li>
+          <li>Tien Phap Evan Nguyen</li>
         </ul>
       </div>
     </main>
