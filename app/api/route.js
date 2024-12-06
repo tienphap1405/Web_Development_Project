@@ -13,7 +13,6 @@ const GET_ANIME_QUERY = gql`
           romaji
           english
         }
-        description
         coverImage {
           large
         }

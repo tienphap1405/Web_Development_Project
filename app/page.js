@@ -2,17 +2,13 @@ import React from "react";
 import AnimeList from "./components/animeList";
 export default function Home() {
   return (
-    <main>
-      <div>
-        <h1>HELLO</h1>
-        <h1>Project Topic: My Anime Vault</h1>
-        <h3>Team Member</h3>
-        <ul>
-          <li>Simon Luna Patiarroy</li>
-          <li>Tien Phap Evan Nguyen</li>
-        </ul>
-        <AnimeList/>
-      </div>
+    <main className="bg-white">
+        <section className="p-4 max-w-6xl mx-auto">
+          <div className=" bg-violet-800 text-white mb-3 rounded-t-lg border-black border-2">
+            <h1 className="p-5">Anime List</h1>
+          </div>
+          <AnimeList/>
+        </section>
     </main>
   );
 }

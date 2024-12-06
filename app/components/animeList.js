@@ -30,18 +30,21 @@ export default function AnimeList(){
             </div>
         );
     }
-    return(
-        <div>
-            <h1>Popular Anime</h1>
-            <div>
-                {animeList.map((anime) => (
-                    <div key={anime.id}>
-                        <h2>{anime.title.english || anime.title.romaji}</h2>
-                        <img src={anime.coverImage.large} alt={anime.title.romaji}></img>
-                        <p>{anime.description}</p>
-                    </div>
-                ))}
-            </div>
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {animeList.map((anime) => (
+                <button key={anime.id} className=" m border-2 border-neutral-200 p-2 shadow-md rounded-t-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl
+                 hover:scale-110 hover:bg-indigo-500 ease-in-out duration-300 hover:border-black border-2">
+                    <img
+                        src={anime.coverImage.large}
+                        alt={anime.title.romaji}
+                        className="rounded-t-lg w-full h-5/6 "
+                    />
+                    <p className=" mt-2 text-lg text-black ">
+                        {anime.title.english || anime.title.romaji}
+                    </p>
+                </button>
+            ))}
         </div>
     );
 };
