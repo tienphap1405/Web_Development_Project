@@ -1,5 +1,5 @@
-
-
+import React from "react";
+import AnimeList from "./components/animeList";
 export default function Home() {
   return (
     <main>
@@ -11,6 +11,7 @@ export default function Home() {
           <li>Simon Luna Patiarroy</li>
           <li>Tien Phap Evan Nguyen</li>
         </ul>
+        <AnimeList/>
       </div>
     </main>
   );
