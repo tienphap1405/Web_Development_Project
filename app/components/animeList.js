@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { fetchAnime } from "../api/route";
-import FavoriteToggle from "./FavoriteToggle"; 
+import FavoriteToggle from "./favoriteToggle";
 import AnimeDetails from "./animeDetails";
 
 export default function AnimeList() {
