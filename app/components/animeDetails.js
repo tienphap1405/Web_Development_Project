@@ -1,0 +1,43 @@
+import React from "react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+
+const AnimeDetails = ({ anime, onBack, toggleFavorite, isFavorite }) => {
+  const plainTextDescription = anime.description.replace(/<\/?[^>]+(>|$)/g, "");
+  return (
+    <div className=" rounded-lg">
+      <button 
+        onClick={onBack}
+        className="mb-4 px-3 py-1 rounded-full bg-indigo-500 hover:bg-indigo-700 text-white transition duration-0 md:duration-150"
+      >
+        {'<'}
+      </button>
+      <div className="flex flex-col md:flex-row items-center md:items-start">
+        <img
+          src={anime.coverImage.large}
+          alt={anime.title.romaji}
+          className="w-64 h-auto rounded-lg shadow-lg"
+        />
+        <div className="mt-4 md:mt-0 md:ml-8">
+          <h2 className="text-2xl font-bold">{anime.title.romaji}</h2>
+          <h3 className="text-xl text-gray-600 mt-2">{anime.title.english}</h3>
+          <p className="mt-4 text-gray-700">{plainTextDescription}</p>
+          <div className="flex items-center mt-4">
+            <p className="text-gray-700 mr-2">Favorite:</p>
+            <div
+              className="cursor-pointer"
+              onClick={() => toggleFavorite(anime.id)}
+            >
+              {isFavorite ? (
+                <AiFillHeart className="text-red-500 text-2xl" />
+              ) : (
+                <AiOutlineHeart className="text-gray-500 text-2xl" />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AnimeDetails;

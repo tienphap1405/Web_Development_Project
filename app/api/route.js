@@ -3,7 +3,6 @@ import { request, gql } from "graphql-request";
 
 const GRAPHQL_ENDPOINT = "https://graphql.anilist.co";
 
-// Define the GraphQL query
 const GET_ANIME_QUERY = gql`
   query ($page: Int, $perPage: Int) {
     Page(page: $page, perPage: $perPage) {
@@ -13,6 +12,7 @@ const GET_ANIME_QUERY = gql`
           romaji
           english
         }
+        description
         coverImage {
           large
         }
