@@ -17,7 +17,7 @@ export default function AnimeList() {
       setLoading(true);
       setError(null);
       try {
-        const animeData = await fetchAnime(page, 10); // Fetch data for current page
+        const animeData = await fetchAnime(page, 10); 
         setAnimeList(animeData);
       } catch (err) {
         setError("Failed to fetch anime. Please try again.");
@@ -28,7 +28,6 @@ export default function AnimeList() {
     loadAnime();
   }, [page]); // Refetch when page changes
 
-  // Update favorite status
   const handleToggleFavorite = async (animeId) => {
     setFavorites((prevFavorites) => {
       const updatedFavorites = new Set(prevFavorites);
@@ -40,9 +39,9 @@ export default function AnimeList() {
       return updatedFavorites;
     });
   };
-  // Back to list handler
+
   const backToList = () => {
-    setSelectedAnime(null); // Reset selected anime
+    setSelectedAnime(null); 
   };
 
   if (loading) {
@@ -55,7 +54,6 @@ export default function AnimeList() {
             viewBox="0 0 100 101"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Spinner paths */}
           </svg>
           <span className="sr-only">Loading anime...</span>
         </div>
@@ -90,24 +88,24 @@ export default function AnimeList() {
         {animeList.map((anime) => (
           <div
             key={anime.id}
-            onClick={() => setSelectedAnime(anime)} // Show details on click
+            onClick={() => setSelectedAnime(anime)} 
             className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 ease-in-out duration-300 hover:border-black cursor-pointer"
           >
-            {/* Anime Image */}
+
             <img
               src={anime.coverImage.large}
               alt={anime.title.romaji}
               className="rounded-t-lg w-full h-5/6"
             />
-            {/* Anime Title */}
+
             <p className="mt-2 text-md text-black text-center text-wrap md:text-balance">
               {anime.title.english || anime.title.romaji}
             </p>
-            {/* Favorite Icon */}
+
             <FavoriteToggle
               isFavorite={favorites.has(anime.id)}
               onToggle={(e) => {
-                e.stopPropagation(); // Prevent triggering the card click
+                e.stopPropagation();
                 handleToggleFavorite(anime.id);
               }}
             />
@@ -115,11 +113,10 @@ export default function AnimeList() {
         ))}
       </div>
 
-      {/* Pagination Controls */}
       <div className="flex justify-between items-center mt-4">
         <button
           onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
-          disabled={page === 1} // Disable "Previous" button on first page
+          disabled={page === 1} 
           className={`px-4 py-2 rounded-lg ${
             page === 1 ? "bg-gray-300" : "bg-indigo-500 hover:bg-indigo-700"
           } text-white`}
