@@ -7,7 +7,7 @@ const AnimeDetails = ({ anime, onBack, toggleFavorite, isFavorite }) => {
     <div className=" rounded-lg">
       <button 
         onClick={onBack}
-        className="mb-4 px-3 py-1 rounded-full bg-indigo-500 hover:bg-indigo-700 text-white transition duration-0 md:duration-150"
+        className="mb-4 px-3 py-1 rounded-full bg-amber-500 hover:bg-blue-300 text-white transition duration-0 md:duration-150"
       >
         {'<'}
       </button>
@@ -19,10 +19,10 @@ const AnimeDetails = ({ anime, onBack, toggleFavorite, isFavorite }) => {
         />
         <div className="mt-4 md:mt-0 md:ml-8">
           <h2 className="text-2xl font-bold">{anime.title.romaji}</h2>
-          <h3 className="text-xl text-gray-600 mt-2">{anime.title.english}</h3>
-          <p className="mt-4 text-gray-700">{plainTextDescription}</p>
+          <h3 className="text-xl text-black mt-2">{anime.title.english}</h3>
+          <p className="mt-4 text-black">{plainTextDescription}</p>
           <div className="flex items-center mt-4">
-            <p className="text-gray-700 mr-2">Favorite:</p>
+            <p className="text-black mr-2">Favorite:</p>
             <div
               className="cursor-pointer"
               onClick={() => toggleFavorite(anime.id)}
@@ -30,7 +30,7 @@ const AnimeDetails = ({ anime, onBack, toggleFavorite, isFavorite }) => {
               {isFavorite ? (
                 <AiFillHeart className="text-red-500 text-2xl" />
               ) : (
-                <AiOutlineHeart className="text-gray-500 text-2xl" />
+                <AiOutlineHeart className="text-black text-2xl" />
               )}
             </div>
           </div>

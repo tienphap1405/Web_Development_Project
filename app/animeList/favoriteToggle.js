@@ -8,7 +8,7 @@ export default function FavoriteToggle({isFavorite, onToggle}){
                 <AiFillHeart className="text-red-500 text-2xl"/>
             ):
             (
-                <AiFillHeart className="text-black text-2xl"/>
+                <AiOutlineHeart className="text-black text-2xl"/>
             )
         }
         </div>

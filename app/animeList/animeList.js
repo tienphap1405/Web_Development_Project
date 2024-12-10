@@ -82,14 +82,14 @@ export default function AnimeList() {
 
   return (
 
-    <div>
+    <div className="flex flex-col justify-center items-center">
       {/* Anime Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-6 p-4">
         {animeList.map((anime) => (
           <div
             key={anime.id}
             onClick={() => setSelectedAnime(anime)} 
-            className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 ease-in-out duration-300 hover:border-black cursor-pointer"
+            className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
           >
 
             <img
@@ -113,20 +113,20 @@ export default function AnimeList() {
         ))}
       </div>
 
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-4 w-1/2">
         <button
           onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
           disabled={page === 1} 
           className={`px-4 py-2 rounded-lg ${
-            page === 1 ? "bg-gray-300" : "bg-indigo-500 hover:bg-indigo-700"
-          } text-white`}
+            page === 1 ? "bg-gray-300 font-normal text-white" : "bg-yellow-500 hover:bg-amber-500"
+          } text-black font-semibold`}
         >
           Previous
         </button>
         <p className="text-lg font-semibold">Page {page}</p>
         <button
           onClick={() => setPage((prevPage) => prevPage + 1)}
-          className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-700 text-white"
+          className="px-4 py-2 rounded-lg bg-yellow-500 hover:bg-amber-500 font-semibold text-black"
         >
           Next
         </button>
