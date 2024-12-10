@@ -10,7 +10,7 @@ export default function Home() {
       <section className="flex-col items-center justify-center w-full h-full">
         <QuickView name={"Trending"} category={"trending"}/>
         <QuickView name={"New Releases"} category={"new"}/>
-        <QuickView name={"Most Popular"} category={"score"}/>
+        <QuickView name={"All Time Best"} category={"score"}/>
       </section>
       <Footer/>
     </main>
