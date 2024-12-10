@@ -9,6 +9,9 @@ export default function Page() {
     <main className="bg-cyan-600">
         <NavigationBar/>
         <section className="p-4 max-w-6xl mx-auto">
+          <button className="bg-cyan-500 text-white font-bold py-2 px-4 rounded mb-4">Trending</button>
+          <button className="bg-cyan-500 text-white font-bold py-2 px-4 rounded mb-4">New Releases</button>
+          <button className="bg-cyan-500 text-white font-bold py-2 px-4 rounded mb-4">Most Popular</button>
           <AnimeList/>
         </section>
         <Footer/>
