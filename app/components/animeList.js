@@ -39,7 +39,7 @@ export default function AnimeList({category = "popular", longForm = true}) {
       }
     };
     loadAnime();
-  }, [page]); // Refetch when page changes
+  }, [page, category]); 
 
   const handleToggleFavorite = async (animeId) => {
     setFavorites((prevFavorites) => {
@@ -124,11 +124,9 @@ export default function AnimeList({category = "popular", longForm = true}) {
             </p>
 
             <FavoriteToggle
-              isFavorite={favorites.has(anime.id)}
-              onToggle={(e) => {
-                e.stopPropagation();
-                handleToggleFavorite(anime.id);
-              }}
+            anime={anime}
+            isFavorite={favorites.has(anime.id)}
+            onToggle={(isFavorite) => handleToggleFavorite(anime.id, isFavorite)}
             />
           </div>
         ))}

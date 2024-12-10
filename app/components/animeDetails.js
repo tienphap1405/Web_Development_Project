@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-const AnimeDetails = ({ anime, onBack, toggleFavorite, isFavorite }) => {
+const AnimeDetails = ({ anime, onBack}) => {
   const plainTextDescription = anime.description.replace(/<\/?[^>]+(>|$)/g, "");
   return (
     <div className=" rounded-lg">
@@ -21,19 +21,6 @@ const AnimeDetails = ({ anime, onBack, toggleFavorite, isFavorite }) => {
           <h2 className="text-2xl font-bold">{anime.title.romaji}</h2>
           <h3 className="text-xl text-black mt-2">{anime.title.english}</h3>
           <p className="mt-4 text-black">{plainTextDescription}</p>
-          <div className="flex items-center mt-4">
-            <p className="text-black mr-2">Favorite:</p>
-            <div
-              className="cursor-pointer"
-              onClick={() => toggleFavorite(anime.id)}
-            >
-              {isFavorite ? (
-                <AiFillHeart className="text-red-500 text-2xl" />
-              ) : (
-                <AiOutlineHeart className="text-black text-2xl" />
-              )}
-            </div>
-          </div>
         </div>
       </div>
     </div>
