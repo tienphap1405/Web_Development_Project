@@ -5,7 +5,7 @@ import FavoriteToggle from "./favoriteToggle";
 import AnimeDetails from "./animeDetails";
 import PreviousNextButtons from "./previous-next-buttons";
 
-export default function AnimeList({category = "popular", longForm = true}) {
+export default function AnimeList({sort = "popular", longForm = true}) {
   const [animeList, setAnimeList] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
@@ -23,11 +23,11 @@ export default function AnimeList({category = "popular", longForm = true}) {
       } 
       let queryInput = "POPULAR_DESC";
       try {
-        if (category === "trending") {
+        if (sort === "trending") {
           queryInput = "TRENDING_DESC";
-        } else if (category === "new") {
+        } else if (sort === "new") {
           queryInput = "START_DATE_DESC";
-        } else if (category === "score") {
+        } else if (sort === "score") {
           queryInput = "SCORE_DESC";
         } else {
           queryInput = "POPULARITY_DESC";
@@ -41,7 +41,7 @@ export default function AnimeList({category = "popular", longForm = true}) {
       }
     };
     loadAnime();
-  }, [page]); // Refetch when page changes
+  }, [page, sort]); // Refetch when page changes or when sorting type changes
 
   const handleSetPage = (direction) => {
     setPage(direction);
