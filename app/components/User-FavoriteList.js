@@ -75,17 +75,16 @@ export default function FavoritesPage() {
               alt={anime.animeTitle}
               className="rounded-t-lg w-full h-5/6"
             />
-            <h2 className="mt-2 text-md text-black text-center">
+            <p className="mt-2 text-md text-black text-center text-wrap md:text-balance line-clamp-2 min-h-10">
               {anime.animeTitle}
-            </h2>
-
-            <div className="absolute top-2 right-2">
-              <FavoriteToggle
-                anime={anime}
-                isFavorite={true}
-                onToggle={() => handleToggleFavorite(anime.animeId)}
-              />
-            </div>
+            </p>
+            
+            <FavoriteToggle
+              anime={anime}
+              isFavorite={true}
+              onToggle={() => handleToggleFavorite(anime.animeId)}
+            />
+            
           </div>
         ))}
       </div>
