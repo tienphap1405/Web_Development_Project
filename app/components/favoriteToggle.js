@@ -43,9 +43,9 @@ export default function FavoriteToggle({ anime, isFavorite, onToggle }) {
         {isLoading ? (
           <span>Loading...</span> 
         ) : isFavorite ? (
-          <AiFillHeart className="text-red-500 text-2xl" />
+          <AiFillHeart className="text-red-500 text-2xl hover:text-gray-500" />
         ) : (
-          <AiOutlineHeart className="text-gray-500 text-2xl" />
+          <AiOutlineHeart className="text-gray-500 text-2xl hover:text-red-500" />
         )}
       </button>
 
