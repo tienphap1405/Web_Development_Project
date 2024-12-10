@@ -1,9 +1,10 @@
-import React from "react";
-import AnimeList from "./animeList";
+"use client";
+import AnimeList from "../components/animeList";
 import NavigationBar from "../components/navigation-bar";
 import Footer from "../components/footer";
 
 export default function Page() {
+
   return (
     <main className="bg-cyan-600">
         <NavigationBar/>

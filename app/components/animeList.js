@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { fetchAnime } from "../api/route";
 import FavoriteToggle from "./favoriteToggle";
 import AnimeDetails from "./animeDetails";
 
-export default function AnimeList() {
+export default function AnimeList({category = "popular", longForm = true}) {
   const [animeList, setAnimeList] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
@@ -17,8 +18,20 @@ export default function AnimeList() {
       setLoading(true);
       setError(null);
       try {
-        const animeData = await fetchAnime(page, 10); 
-        setAnimeList(animeData);
+        if (category === "trending") {
+          const animeData = await fetchAnime(page, 5, "TRENDING_DESC");
+          setAnimeList(animeData);
+        } else if (category === "new") {
+          const animeData = await fetchAnime(page, 5, "START_DATE_DESC");
+          setAnimeList(animeData);
+        } else if (category === "score") {
+          const animeData = await fetchAnime(page, 5, "SCORE_DESC");
+          setAnimeList(animeData);
+        } else {
+          // Default to popular anime
+          const animeData = await fetchAnime(page, 10); 
+          setAnimeList(animeData);
+        }
       } catch (err) {
         setError("Failed to fetch anime. Please try again.");
       } finally {
@@ -81,9 +94,17 @@ export default function AnimeList() {
   }
 
   return (
-
     <div className="flex flex-col justify-center items-center">
       {/* Anime Grid */}
+      <div className={`flex justify-end w-full  ${longForm === true ? "hidden" : "visible" } `}>
+        <Link href={{
+          pathname: 'animeList',
+          query:`category=${category}`}} 
+          className="text-white">
+          See More...
+        </Link>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-6 p-4">
         {animeList.map((anime) => (
           <div
@@ -113,7 +134,7 @@ export default function AnimeList() {
         ))}
       </div>
 
-      <div className="flex justify-between items-center mt-4 w-1/2">
+      <div className={`flex justify-between items-center mt-4 w-1/2 ${longForm === true ? "visible" : "hidden" } `}>
         <button
           onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
           disabled={page === 1} 
