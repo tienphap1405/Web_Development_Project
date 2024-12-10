@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return ( 
-            <footer className="flex flex-col bg-sky-950 p-6 text-white min-w-full justify-center items-center">
+            <footer className="flex flex-col bg-sky-950 p-6 text-white min-w-full justify-center items-center mt-16">
                 <p className="font-sans text-start">2024 My Anime Vault</p>
                 <div className="flex min-w-full justify-around">
                     <div>

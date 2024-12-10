@@ -17,7 +17,7 @@ export default function AnimeList({sort = "popular", longForm = true}) {
     const loadAnime = async () => {
       setLoading(true);
       setError(null);
-      let perPage = 10;
+      let perPage = 20;
       if (!longForm) {
         perPage = 5;
       } 
