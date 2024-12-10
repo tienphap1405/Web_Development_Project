@@ -4,6 +4,7 @@ import { fetchAnime } from "../api/route";
 import FavoriteToggle from "./favoriteToggle";
 import AnimeDetails from "./animeDetails";
 import PreviousNextButtons from "./previous-next-buttons";
+import AnimeDisplay from "./animeDisplay";
 
 export default function AnimeList({sort = "popular", longForm = true}) {
   const [animeList, setAnimeList] = useState([]); 
@@ -105,30 +106,14 @@ export default function AnimeList({sort = "popular", longForm = true}) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-6 p-4">
         {animeList.map((anime) => (
-          <div
-            key={anime.id}
-            onClick={() => setSelectedAnime(anime)} 
-            className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
-          >
-
-            <img
-              src={anime.coverImage.large}
-              alt={anime.title.romaji}
-              className="rounded-t-lg w-full h-5/6"
-            />
-
-            <p className="mt-2 text-md text-black text-center text-wrap md:text-balance">
-              {anime.title.english || anime.title.romaji}
-            </p>
-
-            <FavoriteToggle
-              isFavorite={favorites.has(anime.id)}
-              onToggle={(e) => {
-                e.stopPropagation();
-                handleToggleFavorite(anime.id);
-              }}
-            />
-          </div>
+            <div key={anime.id}>
+              <AnimeDisplay 
+                anime={anime} 
+                setSelectedAnime={setSelectedAnime} 
+                favorites={favorites} 
+                handleToggleFavorite={handleToggleFavorite}
+              />   
+            </div>
         ))}
       </div>
 
