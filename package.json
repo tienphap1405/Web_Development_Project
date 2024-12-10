@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "encoding": "^0.1.13",
+    "firebase": "^11.0.2",
+    "firebase-auth": "^0.1.2",
     "graphql-request": "^7.1.2",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
