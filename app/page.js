@@ -8,9 +8,10 @@ export default function Home() {
     <main className="flex flex-col justify-center w-full h-full bg-cyan-600" >
       <NavigationBar/>  
       <section className="flex-col items-center justify-center w-full h-full">
+      <QuickView name={"Most Popular"} sort={"popular"}/>
         <QuickView name={"Trending"} sort={"trending"}/>
         <QuickView name={"New Releases"} sort={"new"}/>
-        <QuickView name={"All Time Best"} sort={"score"}/>
+        <QuickView name={"Highest Rated"} sort={"score"}/>
       </section>
       <Footer/>
     </main>

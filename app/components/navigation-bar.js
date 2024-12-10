@@ -15,7 +15,7 @@ export default function NavigationBar() {
   };
 
   return (
-    <div className="flex justify-center bg-sky-950 p-6 text-white min-w-full">
+    <div className="flex justify-center bg-sky-950 p-6 text-white min-w-full mb-8">
       <div className="flex w-2/3 justify-between items-center">
         <Link
           href="/"
@@ -49,7 +49,7 @@ export default function NavigationBar() {
           ) : (
             <button
               onClick={login}
-              className="flex items-center hover:underline font-sans font-semibold text-blue-300"
+              className="flex items-center hover:underline font-sans font-semibold text-amber-500"
             >
               Login
             </button>
