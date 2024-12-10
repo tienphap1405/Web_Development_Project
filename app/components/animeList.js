@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { fetchAnime } from "../api/route";
 import FavoriteToggle from "./favoriteToggle";
 import AnimeDetails from "./animeDetails";
+import PreviousNextButtons from "./previous-next-buttons";
 
-export default function AnimeList({category = "popular", longForm = true}) {
+export default function AnimeList({sort = "popular", longForm = true}) {
   const [animeList, setAnimeList] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
@@ -17,21 +17,23 @@ export default function AnimeList({category = "popular", longForm = true}) {
     const loadAnime = async () => {
       setLoading(true);
       setError(null);
+      let perPage = 10;
+      if (!longForm) {
+        perPage = 5;
+      } 
+      let queryInput = "POPULAR_DESC";
       try {
-        if (category === "trending") {
-          const animeData = await fetchAnime(page, 5, "TRENDING_DESC");
-          setAnimeList(animeData);
-        } else if (category === "new") {
-          const animeData = await fetchAnime(page, 5, "START_DATE_DESC");
-          setAnimeList(animeData);
-        } else if (category === "score") {
-          const animeData = await fetchAnime(page, 5, "SCORE_DESC");
-          setAnimeList(animeData);
+        if (sort === "trending") {
+          queryInput = "TRENDING_DESC";
+        } else if (sort === "new") {
+          queryInput = "START_DATE_DESC";
+        } else if (sort === "score") {
+          queryInput = "SCORE_DESC";
         } else {
-          // Default to popular anime
-          const animeData = await fetchAnime(page, 10); 
-          setAnimeList(animeData);
+          queryInput = "POPULARITY_DESC";
         }
+        const animeData = await fetchAnime(page, perPage, queryInput);
+        setAnimeList(animeData);
       } catch (err) {
         setError("Failed to fetch anime. Please try again.");
       } finally {
@@ -39,7 +41,11 @@ export default function AnimeList({category = "popular", longForm = true}) {
       }
     };
     loadAnime();
-  }, [page, category]); 
+  }, [page, sort]); // Refetch when page changes or when sorting type changes
+
+  const handleSetPage = (direction) => {
+    setPage(direction);
+  }
 
   const handleToggleFavorite = async (animeId) => {
     setFavorites((prevFavorites) => {
@@ -96,14 +102,6 @@ export default function AnimeList({category = "popular", longForm = true}) {
   return (
     <div className="flex flex-col justify-center items-center">
       {/* Anime Grid */}
-      <div className={`flex justify-end w-full  ${longForm === true ? "hidden" : "visible" } `}>
-        <Link href={{
-          pathname: 'animeList',
-          query:`category=${category}`}} 
-          className="text-white">
-          See More...
-        </Link>
-      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-6 p-4">
         {animeList.map((anime) => (
@@ -132,24 +130,7 @@ export default function AnimeList({category = "popular", longForm = true}) {
         ))}
       </div>
 
-      <div className={`flex justify-between items-center mt-4 w-1/2 ${longForm === true ? "visible" : "hidden" } `}>
-        <button
-          onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
-          disabled={page === 1} 
-          className={`px-4 py-2 rounded-lg ${
-            page === 1 ? "bg-gray-300 font-normal text-white" : "bg-yellow-500 hover:bg-amber-500"
-          } text-black font-semibold`}
-        >
-          Previous
-        </button>
-        <p className="text-lg font-semibold">Page {page}</p>
-        <button
-          onClick={() => setPage((prevPage) => prevPage + 1)}
-          className="px-4 py-2 rounded-lg bg-yellow-500 hover:bg-amber-500 font-semibold text-black"
-        >
-          Next
-        </button>
-      </div>
+      <PreviousNextButtons handleSetPage={handleSetPage} page={page} longForm={longForm} />
     </div>
   );
 }
