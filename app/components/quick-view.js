@@ -8,7 +8,8 @@ export default function QuickView({name, sort}){
             <div className="flex justify-end w-full">
                 <Link href={{
                 pathname: 'animeList',
-                query:`category=${sort}`}} 
+                query:{sort}
+                }} 
                 className="text-white">
                 See More...
                 </Link>
