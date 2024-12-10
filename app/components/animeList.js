@@ -4,6 +4,7 @@ import { fetchAnime } from "../api/route";
 import FavoriteToggle from "./favoriteToggle";
 import AnimeDetails from "./animeDetails";
 import PreviousNextButtons from "./previous-next-buttons";
+import AnimeDisplay from "./animeDisplay";
 
 export default function AnimeList({sort = "popular", longForm = true}) {
   const [animeList, setAnimeList] = useState([]); 
