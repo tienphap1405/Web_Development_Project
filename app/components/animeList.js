@@ -62,14 +62,14 @@ export default function AnimeList({sort = "popular", longForm = true, handleSetH
   const handleSetSelectedAnime = (anime) => {
     setSelectedAnime(anime);
     if (handleSetHidden) {
-      handleSetHidden(true);
+      handleSetHidden(false);
     }
   }
 
   const backToList = () => {
     setSelectedAnime(null); 
     if (handleSetHidden) {
-      handleSetHidden(false);
+      handleSetHidden(true);
     }
   };
 

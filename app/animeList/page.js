@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 
 function AnimePageContent() {
   const [category, setCategory] = useState("popular");
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   // Get the sort parameter from the URL
   const searchParams = useSearchParams();
@@ -40,7 +40,7 @@ function AnimePageContent() {
           <h1 className="text-5xl text-sky-950 font-sans font-bold italic">
             Browse Anime
           </h1>
-          <div className="flex items-center pt-5 space-x-3 w-full">
+          {hidden && (<div className="flex items-center pt-5 space-x-3 w-full">
             <a className="py-2 pr-2 mb-4 font-semibold italic">
               Sorting by:
             </a>
@@ -73,6 +73,7 @@ function AnimePageContent() {
               longForm={true}
             />
           </div>
+          )}
         </div>
         <AnimeList sort={category} handleSetHidden={handleSetHidden}/>
       </section>
