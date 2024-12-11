@@ -68,7 +68,7 @@ export default function UserVault() {
     };
 
     loadWatched();
-  }, [user]);
+  }, [user, selectedAnime]);
 
   // Toggle Favorite
   const handleToggleFavorite = async (animeId) => {
@@ -108,7 +108,7 @@ const handleToggleWatched = async (animeId) => {
   }
 };
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex h-screen justify-center">Loading...</div>;
   }
 
   if (error) {
@@ -138,7 +138,7 @@ const handleToggleWatched = async (animeId) => {
           {watched.map((anime) => (
             <div
               key={anime.animeId}
-              // onClick={() => setSelectedAnime(anime)}
+              onClick={() => setSelectedAnime(anime)}
               className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
             >
               <img

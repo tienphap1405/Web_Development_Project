@@ -11,13 +11,30 @@ export default function ReviewForm({ anime, user }) {
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState(null);
 
-    const updateReviewAndRating = async (userId, review, rating) => {
+    const updateReviewAndRatingFavorite = async (userId, review, rating) => {
     
         const favoriteRef = doc(db, `users/${userId}/favorites`, `${anime.animeId}`);
 
         try {
         // Update the review and rating in the existing document
         await updateDoc(favoriteRef, {
+            animeReview: review,
+            animeRating: rating,
+          });
+    
+        console.log("Review and rating updated successfully.");
+        } catch (error) {
+        console.error("Failed to update review and rating:", error);
+        }
+    };
+
+    const updateReviewAndRatingWatched = async (userId, review, rating) => {
+    
+        const watchedRef = doc(db, `users/${userId}/watched_Anime`, `${anime.animeId}`);
+
+        try {
+        // Update the review and rating in the existing document
+        await updateDoc(watchedRef, {
             animeReview: review,
             animeRating: rating,
           });
@@ -43,7 +60,8 @@ export default function ReviewForm({ anime, user }) {
         setError(null);
 
         try {
-        await updateReviewAndRating(user.uid, review, rating );
+        await updateReviewAndRatingFavorite(user.uid, review, rating );
+        await updateReviewAndRatingWatched(user.uid, review, rating );
         setReview(review);
         setRating(rating);
         } catch (err) {
