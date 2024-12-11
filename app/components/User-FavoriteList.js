@@ -36,7 +36,7 @@ export default function FavoritesPage() {
     };
 
     loadFavorites();
-  }, [user]);
+  }, [user, selectedAnime]);
 
   const backToList = () => {
     setSelectedAnime(null);

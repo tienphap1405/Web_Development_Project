@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { db, doc, setDoc, collection, updateDoc } from "firebase/firestore";
+import { db } from "../authentication/firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 
 export default function ReviewForm({ anime, user }) {
@@ -17,12 +18,8 @@ export default function ReviewForm({ anime, user }) {
         try {
         // Update the review and rating in the existing document
         await updateDoc(favoriteRef, {
-            animeId: anime.id,
-            animeTitle: anime.title.english || anime.title.romaji,
-            animeImage: anime.coverImage.large,
             animeReview: review,
             animeRating: rating,
-            createdAt: new Date(),
           });
     
         console.log("Review and rating updated successfully.");
@@ -47,14 +44,16 @@ export default function ReviewForm({ anime, user }) {
 
         try {
         await updateReviewAndRating(user.uid, review, rating );
-        setReview("");
-        setRating(0);
+        setReview(review);
+        setRating(rating);
         } catch (err) {
         console.error("Failed to add review:", err);
         setError("Failed to add review. Please try again.");
         } finally {
         setSubmitting(false);
         }
+
+
     };
 
     return (
