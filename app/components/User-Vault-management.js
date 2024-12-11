@@ -4,6 +4,8 @@ import { useUserAuth } from "../authentication/auth-context";
 import FavoriteToggle from "./favoriteToggle";
 import WatchedToggle from "./watchedToggle";
 import { fetchWatched, removeWatchedAnime } from "./WatchedList-Service";
+import AnimeReviews from "./animeReviews";
+
 
 export default function UserVault() {
   const { user } = useUserAuth();
@@ -11,6 +13,8 @@ export default function UserVault() {
   const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+    const [selectedAnime, setSelectedAnime] = useState(null);
+
 
   // Fetch favorites
   useEffect(() => {
@@ -34,7 +38,11 @@ export default function UserVault() {
       }
     };
     loadFavorites();
-  }, [user]);
+  }, [user, selectedAnime]);
+
+  const backToList = () => {
+    setSelectedAnime(null);
+  };
   
   useEffect(() => {
     const loadWatched = async () => {
@@ -111,6 +119,16 @@ const handleToggleWatched = async (animeId) => {
     );
   }
 
+  if (selectedAnime) {
+    return (
+      <AnimeReviews
+        user={user}
+        anime={selectedAnime}
+        onBack={backToList}
+      />
+    );
+  }
+
   return (
     <>
       {/* Watched List */}
@@ -120,6 +138,7 @@ const handleToggleWatched = async (animeId) => {
           {watched.map((anime) => (
             <div
               key={anime.animeId}
+              // onClick={() => setSelectedAnime(anime)}
               className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
             >
               <img
@@ -148,6 +167,7 @@ const handleToggleWatched = async (animeId) => {
           {favorites.map((anime) => (
             <div
               key={anime.animeId}
+              onClick={() => setSelectedAnime(anime)}
               className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
             >
               <img
