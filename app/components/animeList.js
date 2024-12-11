@@ -11,6 +11,7 @@ export default function AnimeList({sort = "popular", longForm = true, handleSetH
   const [error, setError] = useState(null); 
   const [page, setPage] = useState(1); 
   const [favorites, setFavorites] = useState(new Set()); 
+  const [watched, setWatched] = useState(new Set());
   const [selectedAnime, setSelectedAnime] = useState(null);
 
   useEffect(() => {
@@ -58,7 +59,17 @@ export default function AnimeList({sort = "popular", longForm = true, handleSetH
       return updatedFavorites;
     });
   };
-  
+  const handleToggleWatched = async (animeId) => {
+    setWatched((prevWatched) => {
+      const updatedWatched = new Set(prevWatched);
+      if (updatedWatched.has(animeId)) {
+        updatedWatched.delete(animeId); 
+      } else {
+        updatedWatched.add(animeId); 
+      }
+      return updatedWatched;
+    });
+  };
   const handleSetSelectedAnime = (anime) => {
     setSelectedAnime(anime);
     if (handleSetHidden) {
@@ -121,6 +132,8 @@ export default function AnimeList({sort = "popular", longForm = true, handleSetH
             handleSetSelectedAnime={handleSetSelectedAnime}
             favorites={favorites}
             handleToggleFavorite={handleToggleFavorite}
+            watched={watched}
+            handleToggleWatched={handleToggleWatched}
           />
         ))}
       </div>
