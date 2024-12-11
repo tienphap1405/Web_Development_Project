@@ -20,8 +20,7 @@ function AnimePageContent() {
     if (flag != undefined) {
       setHidden(flag);
     }
-  }
-]
+  };
 
   const handleSetCategory = (category) => {
     setCategory(category);
