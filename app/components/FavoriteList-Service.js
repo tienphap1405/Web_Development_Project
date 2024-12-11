@@ -10,6 +10,8 @@ export const saveFavorite = async (userId, anime) => {
         animeId: anime.id,
         animeTitle: anime.title.english || anime.title.romaji,
         animeImage: anime.coverImage.large,
+        animeReview: "",
+        animeRating: 0,
         createdAt: new Date(),
       });
       console.log("Favorite saved successfully.");

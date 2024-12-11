@@ -103,8 +103,6 @@ export default function AnimeList({sort = "popular", longForm = true, handleSetH
       <AnimeDetails
         anime={selectedAnime}
         onBack={backToList}
-        toggleFavorite={handleToggleFavorite}
-        isFavorite={favorites.has(selectedAnime.id)}
       />
     );
   }

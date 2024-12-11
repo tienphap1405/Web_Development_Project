@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { fetchFavorites, removeFavorite } from "./FavoriteList-Service";
 import { useUserAuth } from "../authentication/auth-context";
 import FavoriteToggle from "./favoriteToggle";
+import AnimeReviews from "./animeReviews";
 
 
 
@@ -11,6 +12,7 @@ export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedAnime, setSelectedAnime] = useState(null);
 
   useEffect(() => {
     const loadFavorites = async () => {
@@ -35,6 +37,10 @@ export default function FavoritesPage() {
 
     loadFavorites();
   }, [user]);
+
+  const backToList = () => {
+    setSelectedAnime(null);
+  };
 
   const handleToggleFavorite = async (animeId) => {
     if (!user) return;
@@ -61,6 +67,16 @@ export default function FavoritesPage() {
     );
   }
 
+  if (selectedAnime) {
+    return (
+      <AnimeReviews
+        user={user}
+        anime={selectedAnime}
+        onBack={backToList}
+      />
+    );
+  }
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-center mb-6">Your Favorites</h1>
@@ -68,6 +84,7 @@ export default function FavoritesPage() {
         {favorites.map((anime) => (
           <div
             key={anime.animeId}
+            onClick={() => setSelectedAnime(anime)}
             className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
           >
             <img
