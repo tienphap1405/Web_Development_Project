@@ -9,10 +9,19 @@ import { useSearchParams } from "next/navigation";
 
 function AnimePageContent() {
   const [category, setCategory] = useState("popular");
+  const [hidden, setHidden] = useState(false);
 
   // Get the sort parameter from the URL
   const searchParams = useSearchParams();
+  
   const sort = searchParams?.get("sort");
+  
+  const handleSetHidden = (flag) => {
+    if (flag != undefined) {
+      setHidden(flag);
+    }
+  }
+]
 
   const handleSetCategory = (category) => {
     setCategory(category);
@@ -66,7 +75,7 @@ function AnimePageContent() {
             />
           </div>
         </div>
-        <AnimeList sort={category} />
+        <AnimeList sort={category} handleSetHidden={handleSetHidden}/>
       </section>
       <Footer />
     </main>

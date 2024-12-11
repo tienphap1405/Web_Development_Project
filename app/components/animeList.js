@@ -5,7 +5,7 @@ import AnimeDetails from "./animeDetails";
 import PreviousNextButtons from "./previous-next-buttons";
 import AnimeDisplay from "./animeDisplay";
 
-export default function AnimeList({sort = "popular", longForm = true}) {
+export default function AnimeList({sort = "popular", longForm = true, handleSetHidden}) {
   const [animeList, setAnimeList] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
@@ -58,9 +58,19 @@ export default function AnimeList({sort = "popular", longForm = true}) {
       return updatedFavorites;
     });
   };
+  
+  const handleSetSelectedAnime = (anime) => {
+    setSelectedAnime(anime);
+    if (handleSetHidden) {
+      handleSetHidden(true);
+    }
+  }
 
   const backToList = () => {
     setSelectedAnime(null); 
+    if (handleSetHidden) {
+      handleSetHidden(false);
+    }
   };
 
   if (loading) {
@@ -108,7 +118,7 @@ export default function AnimeList({sort = "popular", longForm = true}) {
           <AnimeDisplay
             key={anime.id}
             anime={anime}
-            setSelectedAnime={setSelectedAnime}
+            handleSetSelectedAnime={handleSetSelectedAnime}
             favorites={favorites}
             handleToggleFavorite={handleToggleFavorite}
           />
