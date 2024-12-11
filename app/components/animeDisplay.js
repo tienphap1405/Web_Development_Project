@@ -1,9 +1,9 @@
 import FavoriteToggle from "./favoriteToggle";
 
-export default function AnimeDisplay({anime, setSelectedAnime, favorites, handleToggleFavorite}) {
+export default function AnimeDisplay({anime, handleSetSelectedAnime, favorites, handleToggleFavorite}) {
     return (
         <div
-            onClick={() => setSelectedAnime(anime)} 
+            onClick={() => handleSetSelectedAnime(anime)} 
             className="relative border-2 border-neutral-200 p-2 pb-5 shadow-md rounded-lg transition ease-in-out delay-150 bg-neutral-100 hover:-translate-y-1 drop-shadow-2xl hover:scale-110 hover:bg-indigo-500 duration-300 hover:border-black cursor-pointer"
         >
 

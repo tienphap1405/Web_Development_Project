@@ -8,11 +8,18 @@ import {useSearchParams} from "next/navigation";
 
 export default function Page() {
   const [category, setCategory] = useState("popular");
+  const [hidden, setHidden] = useState(false);
 
   // Get the sort parameter from the URL
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort");
   
+  const handleSetHidden = (flag) => {
+    if (flag != undefined) {
+      setHidden(flag);
+    }
+  }
+
   const handleSetCategory = (category) => {
     setCategory(category);
   }
@@ -28,6 +35,7 @@ export default function Page() {
     <main className="bg-cyan-600">
         <NavigationBar/>
         <section className="p-2 max-w-6xl mx-auto">
+          {!hidden && (
           <div className="pl-4">
             <h1 className="text-5xl text-sky-950 font-sans font-bold italic">Browse Anime</h1>
             <div className="flex items-center pt-5 space-x-3 w-full">
@@ -38,7 +46,8 @@ export default function Page() {
               <CategoryButton name="Highest Rated" prevCategory={category} newCategory={"score"} handleSetCategory={handleSetCategory} longForm={true}/>
             </div>
           </div>
-          <AnimeList sort={category}/>
+          )}
+          <AnimeList sort={category} handleSetHidden={handleSetHidden}/>
         </section>
         <Footer/>
     </main>

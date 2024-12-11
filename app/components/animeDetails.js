@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 const AnimeDetails = ({ anime, onBack}) => {
   const plainTextDescription = anime.description.replace(/<\/?[^>]+(>|$)/g, "");
   return (
-    <div className=" rounded-lg">
+    <div className="rounded-lg mt-4">
       <button 
         onClick={onBack}
         className="mb-4 px-3 py-1 rounded-full bg-amber-500 hover:bg-blue-300 text-white transition duration-0 md:duration-150"
