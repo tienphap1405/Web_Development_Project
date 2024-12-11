@@ -1,6 +1,7 @@
 import FavoriteToggle from "./favoriteToggle";
+import WatchedToggle from "./watchedToggle";
 
-export default function AnimeDisplay({anime, handleSetSelectedAnime, favorites, handleToggleFavorite}) {
+export default function AnimeDisplay({anime, handleSetSelectedAnime, favorites, handleToggleFavorite, handleToggleWatched, watched}) {
     return (
         <div
             onClick={() => handleSetSelectedAnime(anime)} 
@@ -16,12 +17,18 @@ export default function AnimeDisplay({anime, handleSetSelectedAnime, favorites, 
             <p className="mt-2 text-md text-black text-center text-wrap md:text-balance line-clamp-2 min-h-10">
               {anime.title.english || anime.title.romaji}
             </p>
-
-            <FavoriteToggle
-            anime={anime}
-            isFavorite={favorites.has(anime.id)}
-            onToggle={(isFavorite) => handleToggleFavorite(anime.id, isFavorite)}
-            />
-          </div>
+            <div className="flex">
+              <FavoriteToggle
+              anime={anime}
+              isFavorite={favorites.has(anime.id)}
+              onToggle={(isFavorite) => handleToggleFavorite(anime.id, isFavorite)}
+              />
+              <WatchedToggle
+              anime={anime}
+              isWatched={watched.has(anime.id)}
+              onToggle={(isWatched) => handleToggleWatched(anime.id, isWatched)}
+              />
+            </div>
+        </div>
     );
 }

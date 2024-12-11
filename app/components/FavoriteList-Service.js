@@ -1,7 +1,6 @@
 import { db } from "../authentication/firebase";
 import { doc, deleteDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
-import { getAuth } from "firebase/auth";  // For user authentication
-
+import { auth } from "../authentication/firebase";
 export const saveFavorite = async (userId, anime) => {
     const favoriteRef = doc(db, `users/${userId}/favorites`, `${anime.id}`);
   
@@ -25,7 +24,7 @@ export const removeFavorite = async (userId, animeId) => {
   
     try {
       await deleteDoc(favoriteRef);
-      console.log("Favorite removed successfully.");
+      console.log(`Favorite removed successfully.`);
     } catch (error) {
       console.error("Failed to remove favorite:", error);
     }
@@ -35,7 +34,7 @@ export const removeFavorite = async (userId, animeId) => {
 
   export const fetchFavorites = async (userId) => {
     // Ensure the user is authenticated
-    const user = getAuth().currentUser;
+    const user = auth.currentUser;
     if (!user || user.uid !== userId) {
       console.error("User not authenticated or user ID mismatch");
       return [];

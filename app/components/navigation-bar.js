@@ -34,8 +34,8 @@ export default function NavigationBar() {
           >
             Anime List
           </Link>
-          <Link href="/FavoritePage" className="hover:underline font-sans text-blue-300">
-            Favorites
+          <Link href="/UserVault" className="hover:underline font-sans text-blue-300">
+            My Vault
           </Link>
         </div>
         <div className="flex items-center justify-center">
